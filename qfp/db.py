@@ -173,8 +173,10 @@ class QfpDB:
             with np.errstate(divide='ignore', invalid='ignore'):
                 self._filter_candidates(conn, c, qQuad, filtered)
         binned = {k: self._bin_times(v) for k, v in filtered.items()}
-        results = {k: self._scales(v)
-                   for k, v in binned.items() if len(v) >= 4}
+        # results = {k: self._scales(v) for k, v in binned.items() if len(v) >= 4}
+        results = {k: self._scales(v) for k, v in binned.items() if len(v[list(v.keys())[0]]) >= 4}
+
+
         mc = [self.MatchCandidate(k, a[0], a[1], a[2][0], a[2][1])
               for k, v in results.items() for a in v]
         c.close()
