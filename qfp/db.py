@@ -11,6 +11,7 @@ try:
     from itertools import izip
 except:
     izip = zip
+    xrange = range
 
 
 class QfpDB:
