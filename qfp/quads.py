@@ -42,7 +42,7 @@ def _filter_peaks(root, peaks, r, c):
     idx_start = bisect_left(peaks, (windowStart, 0))
     idx_end = bisect_right(peaks, (windowEnd, 0))
     filtered = peaks[idx_start:idx_end]
-    if len(filtered) is 0:
+    if len(filtered) < 3:
         return None
     return filtered
 
@@ -74,7 +74,7 @@ def _valid_quad(q):
     !! NOTE: assumes combinations are sorted by x value
     (default behavior of itertools.combinations)
     """
-    if q.A.y < q.C.y < q.B.y and q.A.y < q.D.y <= q.B.y:
+    if q.A.y < q.C.y <= q.B.y and q.A.y < q.D.y <= q.B.y:
         return True
     else:
         return False
